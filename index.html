@@ -222,6 +222,34 @@
         background: var(--bg-light);
       }
 
+      .about-content-box {
+        background: var(--card-bg);
+        padding: 2.5rem; /* Slightly less padding than skill-item */
+        border-radius: 20px;
+        box-shadow: var(--box-shadow-light);
+        transition: all 0.3s ease;
+        height: 100%; /* Ensure boxes are same height if content varies */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Distribute space within the box */
+      }
+
+      .about-content-box:hover {
+        transform: translateY(-8px); /* Lift on hover */
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+      }
+
+      /* Ensure icons in summary list are well-aligned */
+      .about-content-box ul li {
+        display: flex;
+        align-items: flex-start; /* Align icon and text at the top */
+      }
+
+      .about-content-box ul li i {
+        flex-shrink: 0; /* Prevent icon from shrinking */
+        margin-top: 5px; /* Adjust vertical alignment of icon */
+      }
+
       .skill-item {
         border: none;
         background: var(--card-bg);
@@ -715,6 +743,10 @@
           font-size: 1.3rem;
           margin: 0 10px;
         }
+
+        .about-content-box {
+          padding: 2rem; /* Reduce padding on smaller screens */
+        }
       }
 
       @media (max-width: 768px) {
@@ -941,45 +973,55 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6" data-aos="fade-right" data-aos-duration="1000">
-            <h4 class="mb-3 text-primary">Professional Summary</h4>
-            <ul class="list-unstyled">
-              <li class="mb-2">
-                <i class="fas fa-check-circle text-success me-2"></i>Expert in
-                SharePoint, AEM, and various CMS platforms
-              </li>
-              <li class="mb-2">
-                <i class="fas fa-check-circle text-success me-2"></i>Extensive
-                experience in eCommerce website maintenance
-              </li>
-              <li class="mb-2">
-                <i class="fas fa-check-circle text-success me-2"></i>Strong
-                stakeholder engagement and project management
-              </li>
-              <li class="mb-2">
-                <i class="fas fa-check-circle text-success me-2"></i>Excellent
-                teamwork and communication skills
-              </li>
-            </ul>
+          <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="1000">
+            <div class="about-content-box">
+              <h4 class="mb-3 text-primary">Professional Summary</h4>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>Expert in
+                  SharePoint, AEM, and various CMS platforms
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>Extensive
+                  experience in eCommerce website maintenance
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>Strong
+                  stakeholder engagement and project management
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>Excellent
+                  teamwork and communication skills
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>Proficient in SEO optimization and web analytics
+                </li>
+                <li class="mb-2">
+                  <i class="fas fa-check-circle text-success me-2"></i>Ensuring cross-browser and device compatibility
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="col-md-6" data-aos="fade-left" data-aos-duration="1000">
-            <h4 class="mb-3 text-primary">Education & Contact</h4>
-            <p>
-              <strong>B. Tech (Information Technology)</strong><br />Pondicherry
-              University, 2016
-            </p>
-            <p><strong>Location:</strong> Bangalore, India</p>
-            <p><strong>Languages:</strong> English, Tamil, Urdu, Hindi</p>
-            <div class="mt-4">
-              <a
-                href="mailto:ajijullasahib@gmail.com"
-                class="btn btn-outline-primary me-2"
-              >
-                <i class="fas fa-envelope me-2"></i>Email Me
-              </a>
-              <a href="tel:+919092734853" class="btn btn-outline-primary">
-                <i class="fas fa-phone me-2"></i>Call Me
-              </a>
+          <div class="col-md-6 mb-4" data-aos="fade-left" data-aos-duration="1000">
+            <div class="about-content-box">
+              <h4 class="mb-3 text-primary">Education & Contact</h4>
+              <p class="mb-2">
+                <strong>B. Tech (Information Technology)</strong><br />Pondicherry
+                University, 2016
+              </p>
+              <p class="mb-2"><strong>Location:</strong> Bangalore, India</p>
+              <p class="mb-2"><strong>Languages:</strong> English, Tamil, Urdu, Hindi</p>
+              <div class="mt-4">
+                <a
+                  href="mailto:ajijullasahib@gmail.com"
+                  class="btn btn-outline-primary me-2"
+                >
+                  <i class="fas fa-envelope me-2"></i>Email Me
+                </a>
+                <a href="tel:+919092734853" class="btn btn-outline-primary">
+                  <i class="fas fa-phone me-2"></i>Call Me
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1287,9 +1329,29 @@
 
     <script>
       // Ensure Canvas environment variables are initialized to prevent potential SyntaxErrors
-      const __app_id = typeof window.__app_id !== 'undefined' ? window.__app_id : 'default-app-id-fallback';
-      const __firebase_config = typeof window.__firebase_config !== 'undefined' ? window.__firebase_config : '{}';
-      const __initial_auth_token = typeof window.__initial_auth_token !== 'undefined' ? window.__initial_auth_token : null;
+      // The error "SyntaxError: missing ) after argument list" often points to malformed global injections
+      // or very subtle syntax issues that are hard to spot.
+      // Using a slightly different approach for variable assignment to mitigate potential environment injection issues.
+      let appId;
+      if (typeof window.__app_id !== 'undefined') {
+          appId = window.__app_id;
+      } else {
+          appId = 'default-app-id-fallback';
+      }
+
+      let firebaseConfig;
+      if (typeof window.__firebase_config !== 'undefined') {
+          firebaseConfig = window.__firebase_config;
+      } else {
+          firebaseConfig = '{}';
+      }
+
+      let initialAuthToken;
+      if (typeof window.__initial_auth_token !== 'undefined') {
+          initialAuthToken = window.__initial_auth_token;
+      } else {
+          initialAuthToken = null;
+      }
 
       // Initialize AOS with enhanced options
       AOS.init({
