@@ -303,7 +303,6 @@
         min-height: 200px; /* Ensure enough height for content */
         display: flex;
         align-items: center; /* Vertically centers content and dot */
-        /* Removed justify-content: center; as content will be left/right */
       }
 
       .timeline-content {
@@ -681,22 +680,28 @@
 
         .timeline-item {
           justify-content: flex-start; /* Align content to start for smaller screens */
+          margin-bottom: 3rem; /* Reduce margin for mobile */
+          min-height: auto; /* Allow height to adjust to content */
         }
 
         .timeline-item:nth-child(odd) .timeline-content,
         .timeline-item:nth-child(even) .timeline-content {
+          position: relative; /* Change to relative positioning */
           width: calc(100% - 70px); /* Adjust width */
           left: 70px; /* Push content from the left line */
           right: auto; /* Remove right positioning */
-          transform: translateY(-50%); /* Keep vertical centering */
+          transform: translateY(0); /* Remove vertical centering transform */
+          top: auto; /* Remove top positioning */
         }
 
         .timeline-dot {
           left: 25px; /* Keep dot on the left line */
+          transform: translateX(-50%); /* Only horizontal centering for dot */
+          top: 30px; /* Position dot relative to the top of the item */
         }
 
         .highlighted-experience {
-          transform: scale(1.03) translateY(-50%); /* Maintain vertical centering with scale */
+          transform: scale(1.03); /* Remove translateY for highlighted */
         }
 
         .skill-item {
@@ -1456,7 +1461,7 @@
       const formStatusMessage = document.getElementById('formStatusMessage');
 
       // Set the Formspree endpoint directly in the form's action attribute
-      form.action = "https://formspree.io/f/mdkdeoqn"; // Replace with your actual Formspree endpoint after setting it up
+      form.action = "https://formspree.io/f/mdkdeoqn"; // Updated Formspree endpoint
       form.method = "POST"; // Ensure method is POST
 
       form.addEventListener('submit', async (event) => {
