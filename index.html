@@ -729,6 +729,12 @@
           transform: none;
         }
 
+        /* Explicitly set text-align to left for odd/even items on smaller screens */
+        .timeline-item:nth-child(odd) .timeline-content,
+        .timeline-item:nth-child(even) .timeline-content {
+          text-align: left;
+        }
+
         .timeline-dot {
           left: 25px; /* Keep dot on the left line */
           transform: translateX(-50%); /* Only horizontal centering for dot */
