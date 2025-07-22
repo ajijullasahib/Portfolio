@@ -402,7 +402,7 @@
         border-radius: 20px;
         backdrop-filter: blur(12px);
         box-shadow: var(--box-shadow-light);
-        margin-bottom: 3rem;
+        margin-bottom: 3rem; /* Keep for stacking on mobile */
       }
 
       .social-links a {
@@ -794,6 +794,7 @@
 
         .contact-info {
           padding: 3rem;
+          margin-bottom: 2rem; /* Ensure spacing when stacked */
         }
 
         .timeline-content {
@@ -1194,12 +1195,11 @@
         <h2 class="section-title text-white" data-aos="fade-up">
           Get In Touch
         </h2>
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
+        <div class="row justify-content-center">
+          <!-- Changed col-lg-8 mx-auto to row justify-content-center -->
+          <div class="col-lg-6 col-md-10 mb-4" data-aos="fade-up" data-aos-delay="200">
             <div
-              class="contact-info text-center"
-              data-aos="fade-up"
-              data-aos-delay="200"
+              class="contact-info text-center h-100"
             >
               <div class="row">
                 <div class="col-md-4 mb-4">
@@ -1241,12 +1241,14 @@
                 ></a>
               </div>
             </div>
-            <!-- Contact Form -->
-            <div
-              class="contact-form-container mt-5"
-              data-aos="fade-up"
-              data-aos-delay="400"
-            >
+          </div>
+          <!-- Contact Form -->
+          <div
+            class="col-lg-6 col-md-10 mb-4"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div class="contact-form-container h-100">
               <h3 class="text-center mb-4 text-primary">Send Me a Message</h3>
               <form id="contactForm">
                 <div class="mb-3">
