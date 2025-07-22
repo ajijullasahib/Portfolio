@@ -19,26 +19,30 @@
     <style>
       /* CSS Variables for easy theme management */
       :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #3498db;
-        --accent-color: #e74c3c;
-        --text-color: #333;
-        --text-light: #7f8c8d;
-        --bg-light: #f4f7f6; /* Slightly lighter background */
-        --card-bg: rgba(255, 255, 255, 0.95); /* More opaque */
-        --box-shadow-light: 0 8px 30px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+        --primary-color: #3f51b5; /* Deeper blue for primary elements */
+        --secondary-color: #03a9f4; /* Lighter, vibrant blue */
+        --accent-color: #ff5722; /* Orange-red for accents */
+        --text-color: #333; /* Dark gray for main text */
+        --text-light: #607d8b; /* Lighter gray for secondary text */
+        --bg-light: #fce4ec; /* Very light pinkish background */
+        --card-bg: rgba(255, 255, 255, 0.98); /* Near opaque white for cards */
+        --box-shadow-light: 0 12px 40px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
+        --form-bg: rgba(240, 240, 240, 0.95); /* Slightly darker for readability */
+        --secondary-color-rgb: 3, 169, 244; /* RGB for dynamic gradients */
       }
 
       /* Dark mode variables - controlled by a class on the body */
       body.dark-mode {
-        --primary-color: #1a1a1a;
-        --secondary-color: #3498db;
-        --accent-color: #e74c3c;
-        --text-color: #e0e0e0;
-        --text-light: #b0b0b0;
-        --bg-light: #222222; /* Darker background */
-        --card-bg: rgba(40, 40, 40, 0.95);
-        --box-shadow-light: 0 8px 30px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+        --primary-color: #212121; /* Dark gray */
+        --secondary-color: #039be5; /* Slightly darker blue */
+        --accent-color: #f4511e; /* Darker orange-red */
+        --text-color: #e0e0e0; /* Light gray */
+        --text-light: #bdbdbd; /* Medium light gray */
+        --bg-light: #303030; /* Medium dark gray background */
+        --card-bg: rgba(50, 50, 50, 0.95); /* Darker cards */
+        --box-shadow-light: 0 12px 40px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+        --form-bg: rgba(40, 40, 40, 0.98); /* Slightly darker for readability in dark mode */
+        --secondary-color-rgb: 3, 155, 229; /* RGB for dynamic gradients in dark mode */
       }
 
       * {
@@ -48,11 +52,12 @@
       }
 
       body {
-        font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* More modern font stack */
-        line-height: 1.7; /* Increased line height for readability */
+        font-family: "Roboto", sans-serif; /* Modern and readable font */
+        line-height: 1.8; /* Increased line height for readability */
         color: var(--text-color);
-        background-color: var(--bg-light); /* Use bg-light for consistency */
-        transition: background-color 0.4s ease, color 0.4s ease; /* Smoother transition */
+        background-color: var(--bg-light);
+        transition: background-color 0.5s ease, color 0.5s ease; /* Smoother transition */
+        overflow-x: hidden; /* Prevent horizontal scroll */
       }
 
       .navbar {
@@ -61,45 +66,47 @@
           var(--primary-color),
           var(--secondary-color)
         );
-        box-shadow: var(--box-shadow-light); /* Consistent shadow */
-        transition: all 0.4s ease;
+        box-shadow: var(--box-shadow-light);
+        transition: all 0.5s ease;
       }
 
       .navbar.scrolled {
         background: rgba(
-          44,
-          62,
-          80,
+          63,
+          81,
+          181,
           0.9
         ); /* Slightly less opaque for better blur */
-        backdrop-filter: blur(12px); /* Increased blur */
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(15px); /* Increased blur */
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
       }
 
       .navbar-brand {
         font-weight: 700;
-        font-size: 1.6rem; /* Slightly larger */
-        letter-spacing: 0.5px;
+        font-size: 1.8rem; /* Larger */
+        letter-spacing: 0.8px;
+        color: white !important;
       }
 
       .nav-link {
         font-weight: 500;
-        margin: 0 12px; /* Increased margin */
+        margin: 0 15px; /* Increased margin */
         transition: color 0.3s ease, transform 0.2s ease;
-        color: rgba(255, 255, 255, 0.8) !important; /* Slightly more visible */
+        color: rgba(255, 255, 255, 0.9) !important; /* Clearly visible */
         position: relative;
+        font-size: 1.1rem;
       }
 
       .nav-link::after {
         content: "";
         position: absolute;
         width: 0;
-        height: 2px;
-        bottom: -5px;
+        height: 3px; /* Thicker underline */
+        bottom: -7px; /* Lower position */
         left: 50%;
         transform: translateX(-50%);
-        background-color: #ffd700;
-        transition: width 0.3s ease-in-out;
+        background-color: #ffee58; /* Gold accent */
+        transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother animation */
       }
 
       .nav-link:hover::after,
@@ -109,8 +116,8 @@
 
       .nav-link:hover,
       .nav-link.active {
-        color: #ffd700 !important;
-        transform: translateY(-2px); /* Subtle lift on hover */
+        color: #ffee58 !important; /* Gold on hover/active */
+        transform: translateY(-3px); /* More pronounced lift */
       }
 
       .hero-section {
@@ -125,7 +132,7 @@
         align-items: center;
         position: relative;
         overflow: hidden;
-        padding: 80px 0; /* Add some padding for smaller screens */
+        padding: 100px 0; /* Generous padding */
       }
 
       .hero-section::before {
@@ -135,169 +142,176 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.08)" points="0,1000 1000,0 1000,1000"/></svg>'); /* Slightly less opaque overlay */
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,0 1000,1000"/></svg>'); /* More prominent overlay */
         background-size: cover;
+        opacity: 0.6;
+        animation: heroOverlayFadeIn 2s ease forwards;
       }
 
       .hero-content {
         position: relative;
         z-index: 2;
-        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+        text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); /* Stronger text shadow */
       }
 
       .hero-title {
-        font-size: 4rem; /* Larger font size */
-        font-weight: 800; /* Bolder */
-        margin-bottom: 1.5rem;
-        animation: fadeInUp 1s ease;
+        font-size: 4.5rem; /* Even larger font size */
+        font-weight: 900; /* Extra bold */
+        margin-bottom: 1.8rem;
+        animation: scaleIn 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; /* Bouncy scale-in */
+        opacity: 0; /* Start hidden */
       }
 
       .hero-subtitle {
-        font-size: 1.75rem; /* Larger subtitle */
-        margin-bottom: 2.5rem;
-        opacity: 0.95;
-        animation: fadeInUp 1s ease 0.2s both;
+        font-size: 2rem; /* Larger subtitle */
+        margin-bottom: 3rem;
+        opacity: 0.98;
+        animation: fadeInUp 1.2s ease 0.4s both;
       }
 
       .btn-custom {
         background: linear-gradient(
           45deg,
           var(--accent-color),
-          #f39c12
-        ); /* Keep vibrant gradient */
+          #ff9800
+        ); /* Vibrant orange gradient */
         border: none;
-        padding: 14px 35px; /* Larger padding */
+        padding: 16px 40px; /* Larger padding */
         border-radius: 50px;
-        font-weight: 600;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1.2px; /* Increased letter spacing */
-        transition: all 0.3s ease;
-        box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4); /* Stronger shadow */
+        letter-spacing: 1.5px; /* Increased letter spacing */
+        transition: all 0.4s ease;
+        box-shadow: 0 8px 25px rgba(255, 87, 34, 0.4); /* Stronger shadow */
       }
 
       .btn-custom:hover {
-        transform: translateY(-3px); /* More pronounced lift */
-        box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+        transform: translateY(-5px) scale(1.02); /* More pronounced lift and slight scale */
+        box-shadow: 0 12px 35px rgba(255, 87, 34, 0.6);
       }
 
       .section-title {
-        font-size: 3rem; /* Larger section titles */
-        font-weight: 800;
+        font-size: 3.5rem; /* Larger section titles */
+        font-weight: 900;
         text-align: center;
-        margin-bottom: 4rem; /* Increased margin */
+        margin-bottom: 5rem; /* Increased margin */
         position: relative;
         color: var(--primary-color);
-        letter-spacing: 0.8px;
+        letter-spacing: 1px;
+        text-transform: capitalize;
       }
 
       .section-title::after {
         content: "";
         position: absolute;
-        bottom: -15px; /* Adjust position */
+        bottom: -20px; /* Adjust position */
         left: 50%;
         transform: translateX(-50%);
-        width: 100px; /* Wider underline */
-        height: 5px; /* Thicker underline */
+        width: 120px; /* Wider underline */
+        height: 6px; /* Thicker underline */
         background: linear-gradient(
           45deg,
           var(--secondary-color),
           var(--accent-color)
         );
-        border-radius: 3px;
+        border-radius: 4px;
       }
 
       .about-section {
-        padding: 120px 0; /* Increased padding */
+        padding: 140px 0; /* Increased padding */
         background: var(--bg-light);
       }
 
       .skill-item {
         border: none;
         background: var(--card-bg);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        border-radius: 25px;
         transform-style: preserve-3d;
-        perspective: 1000px;
-        padding: 2.5rem; /* More padding */
+        perspective: 1200px;
+        padding: 3rem; /* More padding */
         text-align: center;
         box-shadow: var(--box-shadow-light);
-        transition: all 0.4s ease; /* Smoother transition */
-        margin-bottom: 2.5rem;
+        transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skill-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% 0,
+          rgba(var(--secondary-color-rgb), 0.1),
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .skill-item:hover::before {
+        opacity: 1;
       }
 
       .skill-item:hover {
-        transform: translateY(-15px) rotateY(5deg); /* More pronounced lift and slight rotation */
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+        transform: translateY(-20px) rotateY(7deg) scale(1.03); /* More pronounced lift and slight rotation */
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
       }
 
       .skill-icon {
-        font-size: 3.5rem; /* Larger icons */
+        font-size: 4rem; /* Larger icons */
         color: var(--secondary-color);
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.8rem;
+        transition: transform 0.3s ease;
+      }
+
+      .skill-item:hover .skill-icon {
+        transform: scale(1.1) rotateY(10deg);
       }
 
       .experience-section {
-        padding: 120px 0;
+        padding: 140px 0;
         background: var(--bg-light);
       }
 
       .timeline {
         position: relative;
-        padding-top: 20px; /* Add some space above the timeline */
-      }
-
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 3px; /* Thicker line */
-        height: 100%;
-        background: var(--secondary-color);
-        top: 0;
+        padding-top: 30px; /* Add some space above the timeline */
+        /* Removed ::before for the vertical line */
       }
 
       .timeline-item {
         position: relative;
-        margin-bottom: 4rem; /* More space between items */
+        margin-bottom: 5rem;
+        min-height: 150px; /* Adjusted minimum height */
+        display: flex;
+        justify-content: center; /* Center the content horizontally */
+        align-items: center; /* Center the content vertically */
       }
 
       .timeline-content {
         background: var(--card-bg);
-        padding: 2.5rem;
-        border-radius: 15px;
+        padding: 3rem;
+        border-radius: 20px;
         box-shadow: var(--box-shadow-light);
-        position: relative;
-        width: 45%;
+        width: 70%; /* Adjust width as needed */
+        margin: 0 auto; /* Center the content */
         color: var(--text-color);
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.6s ease, box-shadow 0.6s ease;
+        border: 2px solid transparent; /* Initial transparent border for highlight */
       }
 
-      .timeline-item:nth-child(odd) .timeline-content {
-        margin-left: auto;
-      }
+      /* Removed timeline-dot styles */
 
-      .timeline-item:nth-child(even) .timeline-content {
-        margin-right: auto;
-      }
-
-      .timeline-content:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      }
-
-      .timeline-dot {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        top: 50%;
-        width: 25px; /* Larger dot */
-        height: 25px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        border: 5px solid var(--bg-light); /* Border matches background */
-        box-shadow: 0 0 0 5px var(--secondary-color); /* Thicker outer ring */
-        z-index: 1;
+      .highlighted-experience {
+        transform: scale(1.03);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: var(--secondary-color); /* Highlight border color */
       }
 
       .contact-section {
@@ -307,34 +321,35 @@
           var(--secondary-color)
         );
         color: white;
-        padding: 120px 0;
+        padding: 140px 0;
       }
 
       .contact-info {
-        background: rgba(255, 255, 255, 0.15); /* Slightly more opaque */
-        padding: 3rem; /* More padding */
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.2); /* More opaque */
+        padding: 4rem; /* More padding */
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
         box-shadow: var(--box-shadow-light);
+        margin-bottom: 3rem;
       }
 
       .social-links a {
         display: inline-block;
-        width: 55px; /* Larger social icons */
-        height: 55px;
-        background: rgba(255, 255, 255, 0.25);
+        width: 60px; /* Larger social icons */
+        height: 60px;
+        background: rgba(255, 255, 255, 0.3);
         color: white;
         text-align: center;
-        line-height: 55px;
+        line-height: 60px;
         border-radius: 50%;
-        margin: 0 12px;
+        margin: 0 15px;
         transition: all 0.3s ease;
-        font-size: 1.5rem; /* Larger icon inside */
+        font-size: 1.6rem; /* Larger icon inside */
       }
 
       .social-links a:hover {
         background: var(--accent-color);
-        transform: translateY(-5px) rotate(5deg); /* More pronounced lift and rotation */
+        transform: translateY(-8px) rotate(10deg) scale(1.1); /* More pronounced lift and rotation */
       }
 
       .floating-shapes {
@@ -347,55 +362,100 @@
 
       .shape {
         position: absolute;
-        background: rgba(255, 255, 255, 0.1);
-        animation: float 8s ease-in-out infinite; /* Slower float animation */
+        background: rgba(255, 255, 255, 0.15);
+        animation: float 10s ease-in-out infinite alternate,
+          rotate 12s linear infinite; /* Slower float and added rotation */
       }
 
       .shape:nth-child(1) {
-        width: 90px; /* Larger */
-        height: 90px;
-        top: 25%;
-        left: 15%;
+        width: 100px; /* Larger */
+        height: 100px;
+        top: 20%;
+        left: 10%;
         border-radius: 50%;
         animation-delay: 0s;
       }
 
       .shape:nth-child(2) {
-        width: 70px; /* Larger */
-        height: 70px;
-        top: 65%;
-        right: 15%;
-        border-radius: 35%;
-        animation-delay: 3s; /* Adjusted delay */
+        width: 80px; /* Larger */
+        height: 80px;
+        top: 60%;
+        right: 10%;
+        border-radius: 30%;
+        animation-delay: 4s; /* Adjusted delay */
       }
 
       .shape:nth-child(3) {
-        width: 110px; /* Larger */
-        height: 110px;
-        bottom: 25%;
-        left: 25%;
-        border-radius: 25%;
-        animation-delay: 6s; /* Adjusted delay */
+        width: 120px; /* Larger */
+        height: 120px;
+        bottom: 20%;
+        left: 20%;
+        border-radius: 20%;
+        animation-delay: 8s; /* Adjusted delay */
       }
 
       @keyframes float {
         0%,
         100% {
-          transform: translateY(0px);
+          transform: translateY(0px) rotate(0deg);
         }
         50% {
-          transform: translateY(-25px); /* More vertical movement */
+          transform: translateY(-30px) rotate(15deg); /* More vertical movement and rotation */
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
         }
       }
 
       @keyframes fadeInUp {
         from {
           opacity: 0;
-          transform: translateY(40px); /* More pronounced animation */
+          transform: translateY(60px); /* More pronounced animation */
         }
         to {
           opacity: 1;
           transform: translateY(0);
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes heroOverlayFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 0.6;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.25;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.5;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 0.25;
         }
       }
 
@@ -409,7 +469,7 @@
 
       /* Modern scrollbar */
       ::-webkit-scrollbar {
-        width: 10px;
+        width: 12px; /* Thicker scrollbar */
       }
 
       ::-webkit-scrollbar-track {
@@ -418,7 +478,8 @@
 
       ::-webkit-scrollbar-thumb {
         background: var(--secondary-color);
-        border-radius: 5px;
+        border-radius: 6px;
+        border: 2px solid var(--bg-light); /* Border to match background */
       }
 
       /* Scroll Progress Bar */
@@ -426,14 +487,14 @@
         position: fixed;
         top: 0;
         left: 0;
-        height: 4px; /* Thicker progress bar */
+        height: 5px; /* Thicker progress bar */
         background: linear-gradient(
           to right,
           var(--secondary-color),
           var(--accent-color)
         );
         z-index: 9999;
-        transition: width 0.3s ease;
+        transition: width 0.4s ease; /* Smoother transition */
       }
 
       /* Loading Animation */
@@ -449,7 +510,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: opacity 0.6s ease; /* Slower transition */
+        transition: opacity 0.8s ease; /* Slower transition */
       }
 
       body.loaded .loading-screen {
@@ -457,82 +518,149 @@
         pointer-events: none;
       }
 
+      .spinner-border {
+        width: 4rem;
+        height: 4rem;
+        border-width: 0.4em;
+      }
+
       /* Dark mode toggle button styles */
       .dark-mode-toggle {
         position: fixed;
-        bottom: 30px; /* Slightly higher */
-        right: 30px; /* Slightly further from edge */
+        bottom: 40px; /* Slightly higher */
+        right: 40px; /* Slightly further from edge */
         z-index: 1000;
         background-color: var(--secondary-color);
-        border-color: var(--secondary-color);
+        border: 2px solid var(--secondary-color);
         color: white;
-        width: 50px; /* Larger button */
-        height: 50px;
+        width: 55px; /* Larger button */
+        height: 55px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow */
         transition: background-color 0.3s ease, border-color 0.3s ease,
-          transform 0.2s ease;
-        font-size: 1.3rem; /* Larger icon */
+          transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy transition */
+        font-size: 1.4rem; /* Larger icon */
       }
 
       .dark-mode-toggle:hover {
         background-color: var(--accent-color);
         border-color: var(--accent-color);
-        transform: scale(1.1); /* More pronounced scale */
+        transform: scale(1.15); /* More pronounced scale */
+      }
+
+      /* Contact Form Specific Styles */
+      .contact-form-container {
+        background: var(--form-bg);
+        padding: 3.5rem;
+        border-radius: 20px;
+        box-shadow: var(--box-shadow-light);
+        transition: background-color 0.5s ease;
+      }
+
+      .contact-form-container .form-control,
+      .contact-form-container .form-select {
+        background-color: rgba(255, 255, 255, 0.95); /* Made darker for readability */
+        border: 1px solid rgba(0, 0, 0, 0.2); /* Slightly darker border */
+        color: var(--text-color);
+        padding: 0.8rem 1.2rem;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+      }
+
+      body.dark-mode .contact-form-container .form-control,
+      body.dark-mode .contact-form-container .form-select {
+        background-color: rgba(50, 50, 50, 0.95); /* Made darker in dark mode for readability */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Slightly darker border */
+        color: var(--text-color);
+      }
+
+      /* Focus animation for form inputs */
+      .contact-form-container .form-control:focus,
+      .contact-form-container .form-select:focus {
+        border-color: var(--secondary-color); /* Highlight border on focus */
+        box-shadow: 0 0 0 0.25rem rgba(var(--secondary-color-rgb), 0.25); /* Subtle shadow */
+        background-color: var(--card-bg); /* Slightly brighter background on focus */
+        outline: 0; /* Remove default outline */
+      }
+
+      .contact-form-container .form-control::placeholder {
+        color: var(--text-light);
+        opacity: 0.9; /* Increased opacity for placeholder */
+      }
+
+      .contact-form-container .btn-primary {
+        background: var(--accent-color);
+        border-color: var(--accent-color);
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .contact-form-container .btn-primary:hover {
+        background: #ff7043;
+        border-color: #ff7043;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(255, 87, 34, 0.3);
       }
 
       /* Responsive adjustments */
       @media (max-width: 992px) {
-        /* Adjust breakpoint for larger tablets */
         .hero-title {
-          font-size: 3rem;
+          font-size: 3.5rem;
         }
 
         .hero-subtitle {
-          font-size: 1.25rem;
+          font-size: 1.5rem;
         }
 
         .section-title {
-          font-size: 2.2rem;
-        }
-
-        .timeline::before {
-          left: 20px;
+          font-size: 2.8rem;
         }
 
         .timeline-content {
-          width: calc(100% - 60px);
-          margin-left: 60px !important;
-        }
-
-        .timeline-dot {
-          left: 20px;
-        }
-
-        .skill-item {
+          width: 90%; /* Adjust width for smaller screens */
+          margin: 0 auto;
           padding: 2rem;
         }
 
+        .skill-item {
+          padding: 2.5rem;
+        }
+
         .social-links a {
-          width: 45px;
-          height: 45px;
-          line-height: 45px;
-          font-size: 1.2rem;
+          width: 50px;
+          height: 50px;
+          line-height: 50px;
+          font-size: 1.3rem;
+          margin: 0 10px;
         }
       }
 
-      @media (max-width: 576px) {
-        /* Extra small devices */
+      @media (max-width: 768px) {
+        .navbar-brand {
+          font-size: 1.5rem;
+        }
+
+        .nav-link {
+          margin: 0 10px;
+          font-size: 1rem;
+        }
+
+        .hero-section {
+          padding: 80px 0;
+        }
+
         .hero-title {
-          font-size: 2.5rem;
+          font-size: 2.8rem;
           text-align: center;
         }
 
         .hero-subtitle {
-          font-size: 1rem;
+          font-size: 1.2rem;
           text-align: center;
         }
 
@@ -545,6 +673,41 @@
         }
 
         .section-title {
+          font-size: 2.2rem;
+          margin-bottom: 3.5rem;
+        }
+
+        .about-section,
+        .experience-section,
+        .contact-section {
+          padding: 100px 0;
+        }
+
+        .contact-info {
+          padding: 3rem;
+        }
+
+        .timeline-content {
+          width: 95%; /* Further adjust width for small screens */
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero-title {
+          font-size: 2.2rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+
+        .btn-custom {
+          padding: 12px 25px;
+          font-size: 0.9rem;
+        }
+
+        .section-title {
           font-size: 1.8rem;
           margin-bottom: 2.5rem;
         }
@@ -552,7 +715,7 @@
         .about-section,
         .experience-section,
         .contact-section {
-          padding: 80px 0;
+          padding: 60px 0;
         }
 
         .contact-info {
@@ -560,7 +723,23 @@
         }
 
         .social-links a {
-          margin: 0 8px;
+          margin: 0 6px;
+          width: 40px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 1.1rem;
+        }
+
+        .dark-mode-toggle {
+          bottom: 20px;
+          right: 20px;
+          width: 45px;
+          height: 45px;
+          font-size: 1.2rem;
+        }
+
+        .contact-form-container {
+          padding: 2.5rem;
         }
       }
     </style>
@@ -635,7 +814,7 @@
                 development, and content management across global platforms.
               </p>
               <div
-                class="d-flex gap-3"
+                class="d-flex flex-column flex-sm-row gap-3"
                 data-aos="fade-right"
                 data-aos-delay="600"
               >
@@ -649,8 +828,11 @@
             </div>
           </div>
           <div class="col-lg-6 text-center">
-            <div class="hero-image" data-aos="fade-left" data-aos-delay="200">
-              <i class="fas fa-code fa-15x opacity-25"></i>
+            <div class="hero-image" data-aos="zoom-in" data-aos-delay="400">
+              <i
+                class="fas fa-globe fa-15x opacity-25 text-white"
+                style="animation: pulse 2s infinite alternate"
+              ></i>
             </div>
           </div>
         </div>
@@ -678,8 +860,8 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6" data-aos="fade-right">
-            <h4 class="mb-3">Professional Summary</h4>
+          <div class="col-md-6" data-aos="fade-right" data-aos-duration="1000">
+            <h4 class="mb-3 text-primary">Professional Summary</h4>
             <ul class="list-unstyled">
               <li class="mb-2">
                 <i class="fas fa-check-circle text-success me-2"></i>Expert in
@@ -699,8 +881,8 @@
               </li>
             </ul>
           </div>
-          <div class="col-md-6" data-aos="fade-left">
-            <h4 class="mb-3">Education & Contact</h4>
+          <div class="col-md-6" data-aos="fade-left" data-aos-duration="1000">
+            <h4 class="mb-3 text-primary">Education & Contact</h4>
             <p>
               <strong>B. Tech (Information Technology)</strong><br />Pondicherry
               University, 2016
@@ -729,7 +911,7 @@
         <div class="row">
           <div
             class="col-lg-4 col-md-6"
-            data-aos="fade-up"
+            data-aos="zoom-in"
             data-aos-delay="100"
           >
             <div class="skill-item">
@@ -740,7 +922,7 @@
           </div>
           <div
             class="col-lg-4 col-md-6"
-            data-aos="fade-up"
+            data-aos="zoom-in"
             data-aos-delay="200"
           >
             <div class="skill-item">
@@ -751,7 +933,7 @@
           </div>
           <div
             class="col-lg-4 col-md-6"
-            data-aos="fade-up"
+            data-aos="zoom-in"
             data-aos-delay="300"
           >
             <div class="skill-item">
@@ -762,7 +944,7 @@
           </div>
           <div
             class="col-lg-4 col-md-6"
-            data-aos="fade-up"
+            data-aos="zoom-in"
             data-aos-delay="400"
           >
             <div class="skill-item">
@@ -773,7 +955,7 @@
           </div>
           <div
             class="col-lg-4 col-md-6"
-            data-aos="fade-up"
+            data-aos="zoom-in"
             data-aos-delay="500"
           >
             <div class="skill-item">
@@ -784,7 +966,7 @@
           </div>
           <div
             class="col-lg-4 col-md-6"
-            data-aos="fade-up"
+            data-aos="zoom-in"
             data-aos-delay="600"
           >
             <div class="skill-item">
@@ -801,9 +983,8 @@
       <div class="container">
         <h2 class="section-title" data-aos="fade-up">Work Experience</h2>
         <div class="timeline">
-          <div class="timeline-item" data-aos="fade-right">
+          <div class="timeline-item" data-aos="fade-up">
             <div class="timeline-content">
-              <div class="timeline-dot"></div>
               <h4>Senior Global Webmaster</h4>
               <h5 class="text-primary">ABB, Bangalore</h5>
               <p class="text-muted">Aug 2021 - Present</p>
@@ -821,9 +1002,8 @@
             </div>
           </div>
 
-          <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
             <div class="timeline-content">
-              <div class="timeline-dot"></div>
               <h4>EMEA Web Merchandiser</h4>
               <h5 class="text-primary">Lenovo India Pvt Ltd, Bangalore</h5>
               <p class="text-muted">Nov 2018 - Aug 2021</p>
@@ -841,9 +1021,8 @@
             </div>
           </div>
 
-          <div class="timeline-item" data-aos="fade-right">
+          <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
             <div class="timeline-content">
-              <div class="timeline-dot"></div>
               <h4>Web Production Analyst</h4>
               <h5 class="text-primary">
                 Dell International Services India Pvt Ltd
@@ -862,9 +1041,8 @@
             </div>
           </div>
 
-          <div class="timeline-item" data-aos="fade-left">
+          <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
             <div class="timeline-content">
-              <div class="timeline-dot"></div>
               <h4>Web Builder</h4>
               <h5 class="text-primary">Concentrix Daksh India Pvt Ltd</h5>
               <p class="text-muted">Aug 2016 - Aug 2017</p>
@@ -936,6 +1114,60 @@
                 ></a>
               </div>
             </div>
+            <!-- Contact Form -->
+            <div
+              class="contact-form-container mt-5"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <h3 class="text-center mb-4 text-primary">Send Me a Message</h3>
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Your Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="name@example.com"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="subject" class="form-label">Subject</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="subject"
+                    placeholder="Subject of your message"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Your Message</label>
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    rows="5"
+                    placeholder="Type your message here..."
+                    required
+                  ></textarea>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    Send Message
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -960,15 +1192,20 @@
       <i class="fas fa-moon"></i>
     </button>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
     <script>
+      // Ensure Canvas environment variables are initialized to prevent potential SyntaxErrors
+      const __app_id = typeof window.__app_id !== 'undefined' ? window.__app_id : 'default-app-id-fallback';
+      const __firebase_config = typeof window.__firebase_config !== 'undefined' ? window.__firebase_config : '{}';
+      const __initial_auth_token = typeof window.__initial_auth_token !== 'undefined' ? window.__initial_auth_token : null;
+
       // Initialize AOS with enhanced options
       AOS.init({
-        duration: 1000, // Animation duration
+        duration: 1200, // Animation duration (slightly longer)
         once: true, // Whether animation should happen only once - while scrolling down
-        mirror: true, // Whether elements should animate out while scrolling past them
+        mirror: false, // Changed to false for simpler one-time animation on scroll
         anchorPlacement: "top-bottom", // Defines which position of the element should trigger the animation
       });
 
@@ -982,7 +1219,7 @@
 
       const obsOptions = {
         root: null, // viewport
-        threshold: 0.9, // Trigger when 90% of the hero section is visible
+        threshold: 0.7, // Trigger when 70% of the hero section is visible
       };
 
       const observer = new IntersectionObserver((entries) => {
@@ -1053,25 +1290,81 @@
       const darkModeToggle = document.getElementById("darkModeToggle");
       const savedTheme = localStorage.getItem("theme");
 
+      // Function to set RGB custom property based on theme
+      function setSecondaryColorRgb(isDarkMode) {
+        if (isDarkMode) {
+          document.documentElement.style.setProperty(
+            "--secondary-color-rgb",
+            "3, 155, 229"
+          );
+        } else {
+          document.documentElement.style.setProperty(
+            "--secondary-color-rgb",
+            "3, 169, 244"
+          );
+        }
+      }
+
       // Apply saved theme on load
       if (savedTheme === "dark") {
         document.body.classList.add("dark-mode");
         darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        setSecondaryColorRgb(true);
       } else {
         darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        setSecondaryColorRgb(false);
       }
 
       darkModeToggle.addEventListener("click", () => {
         document.body.classList.toggle("dark-mode");
-        if (document.body.classList.contains("dark-mode")) {
-          localStorage.setItem("theme", "dark");
-          darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        } else {
-          localStorage.setItem("theme", "light");
-          darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        }
+        const isDarkMode = document.body.classList.contains("dark-mode");
+        localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+        darkModeToggle.innerHTML = isDarkMode
+          ? '<i class="fas fa-sun"></i>'
+          : '<i class="fas fa-moon"></i>';
+        setSecondaryColorRgb(isDarkMode);
+      });
+
+      // Dynamic icon animation for Hero Section
+      const heroImage = document.querySelector(".hero-image i");
+      if (heroImage) {
+        // No need to set animation style here, it's in CSS.
+        // The color change on scroll is a separate effect.
+        window.addEventListener("scroll", () => {
+          const scrollPosition = window.scrollY;
+          const heroSectionHeight = hero.offsetHeight;
+
+          // Change icon color based on scroll position for a dynamic effect
+          if (scrollPosition > heroSectionHeight * 0.5) {
+            heroImage.style.color = `var(--accent-color)`;
+          } else {
+            heroImage.style.color = `var(--secondary-color)`;
+          }
+        });
+      }
+
+      // Intersection Observer for highlighting experience items
+      const experienceItems = document.querySelectorAll('.timeline-item .timeline-content');
+
+      const experienceObserverOptions = {
+        root: null, // relative to the viewport
+        rootMargin: '0px',
+        threshold: 0.5 // Trigger when 50% of the item is visible
+      };
+
+      const experienceObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('highlighted-experience');
+          } else {
+            entry.target.classList.remove('highlighted-experience');
+          }
+        });
+      }, experienceObserverOptions);
+
+      experienceItems.forEach(item => {
+        experienceObserver.observe(item);
       });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
