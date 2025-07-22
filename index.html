@@ -132,7 +132,7 @@
         align-items: center;
         position: relative;
         overflow: hidden;
-        padding: 100px 0; /* Generous padding */
+        padding: 80px 0; /* Default padding for larger screens */
       }
 
       .hero-section::before {
@@ -194,7 +194,7 @@
         font-size: 3.5rem; /* Larger section titles */
         font-weight: 900;
         text-align: center;
-        margin-bottom: 8rem; /* Increased margin to prevent overlap */
+        margin-bottom: 4rem; /* Reduced margin */
         position: relative;
         color: var(--primary-color);
         letter-spacing: 1px;
@@ -218,7 +218,7 @@
       }
 
       .about-section {
-        padding: 140px 0; /* Increased padding */
+        padding: 80px 0; /* Default padding for larger screens */
         background: var(--bg-light);
       }
 
@@ -303,7 +303,7 @@
       }
 
       .experience-section {
-        padding: 160px 0; /* Increased padding for more space */
+        padding: 80px 0; /* Default padding for larger screens */
         background: var(--bg-light);
       }
 
@@ -322,15 +322,36 @@
         height: 100%;
         background: var(--secondary-color);
         top: 0;
-        z-index: 1; /* Ensure it's behind content and dots */
+        z-index: 1;
       }
 
       .timeline-item {
         position: relative;
         margin-bottom: 5rem;
-        min-height: 200px; /* Ensure enough height for content */
-        display: flex;
-        align-items: center; /* Vertically centers content and dot */
+        display: flex; /* Use flexbox for layout within the item */
+        align-items: flex-start; /* Align content to the top of the line */
+        padding: 0; /* Reset padding to control it within content */
+      }
+
+      /* Position the dot relative to the timeline-item */
+      .timeline-dot {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%); /* Keep horizontal centering */
+        top: 0; /* Position at the top of the item */
+        width: 30px;
+        height: 30px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        border: 6px solid var(--bg-light);
+        box-shadow: 0 0 0 6px var(--secondary-color);
+        z-index: 2;
+        transition: all 0.3s ease;
+      }
+
+      .timeline-item:hover .timeline-dot {
+        transform: translateX(-50%) scale(1.2);
+        background: #ffee58;
       }
 
       .timeline-content {
@@ -338,52 +359,28 @@
         padding: 3rem;
         border-radius: 20px;
         box-shadow: var(--box-shadow-light);
-        position: absolute; /* Absolute positioning for precise control */
-        width: calc(50% - 41px); /* 50% width minus (half dot width + dot border + desired gap) */
+        width: 45%; /* Set a relative width */
         color: var(--text-color);
         transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.6s ease, box-shadow 0.6s ease, border-color 0.6s ease;
-        border: 2px solid transparent; /* Initial transparent border for highlight */
-        top: 50%; /* Center vertically within timeline-item */
-        transform: translateY(-50%); /* Adjust for vertical centering */
-        display: flex; /* For vertical centering of text inside content box */
-        flex-direction: column;
-        justify-content: center;
+        border: 2px solid transparent;
+        flex-shrink: 0; /* Prevent content from shrinking */
       }
 
       .timeline-item:nth-child(odd) .timeline-content {
-        left: 0; /* Position content on the left side */
-        right: calc(50% + 41px); /* Push right edge away from center line */
+        margin-right: 5%; /* Space for the line and dot */
+        text-align: right; /* Align text to the right for left content */
       }
 
       .timeline-item:nth-child(even) .timeline-content {
-        right: 0; /* Position content on the right side */
-        left: calc(50% + 41px); /* Push left edge away from center line */
+        margin-left: 5%; /* Space for the line and dot */
+        text-align: left; /* Align text to the left for right content */
       }
 
-      .timeline-dot {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        top: 50%;
-        width: 30px; /* Larger dot */
-        height: 30px;
-        background: var(--accent-color);
-        border-radius: 50%;
-        border: 6px solid var(--bg-light); /* Border matches background */
-        box-shadow: 0 0 0 6px var(--secondary-color); /* Thicker outer ring */
-        z-index: 2; /* Ensure dot is above content */
-        transition: all 0.3s ease;
-      }
-
-      .timeline-item:hover .timeline-dot {
-        transform: translateX(-50%) translateY(-50%) scale(1.2);
-        background: #ffee58; /* Gold on hover */
-      }
-
+      /* Adjust highlighted experience to not interfere with positioning */
       .highlighted-experience {
-        transform: scale(1.03) translateY(-50%); /* Maintain vertical centering with scale */
+        transform: scale(1.03);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        border-color: var(--secondary-color); /* Highlight border color */
+        border-color: var(--secondary-color);
       }
 
       .contact-section {
@@ -393,7 +390,7 @@
           var(--secondary-color)
         );
         color: white;
-        padding: 140px 0;
+        padding: 80px 0; /* Default padding for larger screens */
       }
 
       .contact-info {
@@ -759,8 +756,12 @@
           font-size: 1rem;
         }
 
-        .hero-section {
-          padding: 80px 0;
+        /* Reduced padding for all sections on medium screens */
+        .hero-section,
+        .about-section,
+        .experience-section,
+        .contact-section {
+          padding: 60px 0;
         }
 
         .hero-title {
@@ -783,13 +784,7 @@
 
         .section-title {
           font-size: 2.2rem;
-          margin-bottom: 3.5rem;
-        }
-
-        .about-section,
-        .experience-section,
-        .contact-section {
-          padding: 100px 0;
+          margin-bottom: 3rem; /* Reduced margin */
         }
 
         .contact-info {
@@ -823,13 +818,15 @@
 
         .section-title {
           font-size: 1.8rem;
-          margin-bottom: 2.5rem;
+          margin-bottom: 2rem; /* Reduced margin */
         }
 
+        /* Further reduced padding for all sections on small screens */
+        .hero-section,
         .about-section,
         .experience-section,
         .contact-section {
-          padding: 60px 0;
+          padding: 40px 0;
         }
 
         .contact-info {
@@ -1196,7 +1193,6 @@
           Get In Touch
         </h2>
         <div class="row justify-content-center">
-          <!-- Changed col-lg-8 mx-auto to row justify-content-center -->
           <div class="col-lg-6 col-md-10 mb-4" data-aos="fade-up" data-aos-delay="200">
             <div
               class="contact-info text-center h-100"
@@ -1331,9 +1327,6 @@
 
     <script>
       // Ensure Canvas environment variables are initialized to prevent potential SyntaxErrors
-      // The error "SyntaxError: missing ) after argument list" often points to malformed global injections
-      // or very subtle syntax issues that are hard to spot.
-      // Using a slightly different approach for variable assignment to mitigate potential environment injection issues.
       let appId;
       if (typeof window.__app_id !== 'undefined') {
           appId = window.__app_id;
